@@ -1,0 +1,18 @@
+<div *ngIf="bookings && bookings.length">
+    <h3>My Booking History</h3>
+    <ul>
+      <li *ngFor="let booking of bookings">
+        <div>
+          <p><strong>Booking ID:</strong> {{ booking.bookingId }}</p>
+          <p><strong>Flight ID:</strong> {{ booking.flight.flightId }}</p>
+          <p><strong>Booking Date:</strong> {{ booking.bookingDate | date }}</p>
+          <p><strong>Status:</strong> {{ booking.status ? 'PENDING' : 'Approved' }}</p>
+        </div>
+        <hr>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="bookings.length==0">
+    <p>No bookings found.</p>
+  </div>
+  

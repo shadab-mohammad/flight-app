@@ -1,0 +1,37 @@
+<h1>Sky Booker</h1>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(10, 135, 245, 0.858)">
+    <div *ngIf="authService.isLoggedIn()">
+       <h5>Hello, {{authService.getUsername()}} - <small>{{authService.getUserRole()}}</small></h5> 
+    </div> 
+    <div >
+      <ul class="navbar">
+        <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+          <a  routerLink="/register">Register</a>
+        </li>
+        <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+          <a  routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a  routerLink="/">Home </a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isAdmin() && authService.isLoggedIn()">
+          <a  routerLink="/add-flight">Add Flight</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isAdmin() || authService.isUser()">
+          <a routerLink="/flight-list">Flight List</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isAdmin() && authService.isLoggedIn()">
+          <a  routerLink="/manage-booking">Manage Booking</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isUser() && authService.isLoggedIn()">
+          <a  routerLink="/book-form">Book Flight</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isUser() && authService.isLoggedIn()">
+          <a  routerLink="/my-history">History</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isLoggedIn()">
+          <a  routerLink="/" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+</nav>

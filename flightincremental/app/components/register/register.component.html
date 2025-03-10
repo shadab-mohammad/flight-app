@@ -1,0 +1,62 @@
+<form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" #username="ngModel" ngModel required>
+      <div *ngIf="username.invalid && (username.dirty || username.touched || registerForm.submitted)" class="error-message">
+        Username is required
+      </div>
+    </div>
+    
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" #email="ngModel" ngModel required email>
+      <div *ngIf="email.invalid && (email.dirty || email.touched || registerForm.submitted)" class="error-message">
+        <div *ngIf="email.errors?.required">Email is required</div>
+        <div *ngIf="email.errors?.email">Please enter a valid email</div>
+      </div>
+    </div>
+    
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" #password="ngModel" ngModel required >
+      <div *ngIf="password.invalid && (password.dirty || password.touched || registerForm.submitted)" class="error-message">
+        <div *ngIf="password.errors?.required">Password is required</div>
+      </div>
+    </div>
+    
+    
+    
+    <div>
+      <label for="mobileNumber">Mobile Number:</label>
+      <input type="tel" id="mobile" name="mobileNumber" #mobileNumber="ngModel" ngModel required >
+      <div *ngIf="mobileNumber.invalid && (mobileNumber.dirty || mobileNumber.touched || registerForm.submitted)" class="error-message">
+        <div *ngIf="mobileNumber.errors?.required">Mobile number is required</div>
+      </div>
+    </div>
+    
+    <div>
+      <label for="userRole">Role:</label>
+      <select id="userRole" name="userRole" #userRole="ngModel" ngModel required>
+        <option value="" selected>Select Role</option>
+        <option value="ADMIN">Admin</option>
+        <option value="USER">User</option>
+      </select>
+      <div *ngIf="userRole.invalid && (userRole.dirty || userRole.touched || registerForm.submitted)" class="error-message">
+        Role is required
+      </div>
+    </div>
+    
+    <button type="submit">Register</button>
+  </form>
+  
+  <!-- Modal Popup for Successful Registration -->
+  <div *ngIf="registrationSuccess" class="modal">
+    <div class="modal-content">
+      <p>Registration Successful!</p>
+      <button (click)="redirectToLogin()">Go to Login</button>
+    </div>
+  </div>
+  <div *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+  

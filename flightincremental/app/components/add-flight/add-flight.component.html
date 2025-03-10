@@ -1,0 +1,87 @@
+<div class="container">
+    <h2>{{ isEditing ? 'Edit Flight' : 'Add Flight' }}</h2>
+
+    <form #flightForm="ngForm" (ngSubmit)="addOrUpdateFlight()">
+        <div class="form-group">
+            <label for="flightNumber">Flight Number *</label>
+            <input type="text" id="flightNumber" name="flightNumber" class="form-control"
+                [(ngModel)]="flight.flightNumber" required #flightNumber="ngModel" />
+            <div *ngIf="flightNumber.invalid && flightNumber.touched" class="text-error">
+                <small>flight number is required.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="airline">Airline *</label>
+            <input type="text" id="airline" name="airline" class="form-control" [(ngModel)]="flight.airline" required
+                #airline="ngModel" />
+            <div *ngIf="airline.invalid && airline.touched" class="text-error">
+                <small>airline is required.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="departureLocation">Departure Location *</label>
+            <input type="text" id="departureLocation" name="departureLocation" class="form-control"
+                [(ngModel)]="flight.departureLocation" required #departureLocation="ngModel" />
+            <div *ngIf="departureLocation.invalid && departureLocation.touched" class="text-error">
+                <small>departure location is required.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="arrivalLocation">Arrival Location *</label>
+            <input type="text" id="arrivalLocation" name="arrivalLocation" class="form-control"
+                [(ngModel)]="flight.arrivalLocation" required #arrivalLocation="ngModel" />
+            <div *ngIf="arrivalLocation.invalid && arrivalLocation.touched" class="text-error">
+                <small>arrival location is required.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="departureTime">Departure Time *</label>
+            <input type="datetime-local" id="departureTime" name="departureTime" class="form-control"
+                [(ngModel)]="flight.departureTime" required #departureTime="ngModel" />
+            <div *ngIf="departureTime.invalid && departureTime.touched" class="text-error">
+                <small>departure time is required.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="arrivalTime">Arrival Time *</label>
+            <input type="datetime-local" id="arrivalTime" name="arrivalTime" class="form-control"
+                [(ngModel)]="flight.arrivalTime" required #arrivalTime="ngModel" />
+            <div *ngIf="arrivalTime.invalid && arrivalTime.touched" class="text-error">
+                <small>arrival time is required.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price *</label>
+            <input type="number" id="price" name="price" class="form-control" [(ngModel)]="flight.price" required
+                #price="ngModel" />
+            <div *ngIf="price.invalid && price.touched" class="text-error">
+                <small>price is required.</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="totalSeats">Total Seats *</label>
+            <input type="number" id="totalSeats" name="totalSeats" class="form-control" [(ngModel)]="flight.totalSeats"
+                required #totalSeats="ngModel" />
+            <div *ngIf="totalSeats.invalid && totalSeats.touched" class="text-error">
+                <small>Total seats is required.</small>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="flightForm.invalid">
+            {{ isEditing ? 'Update Flight' : 'Add Flight' }}
+        </button>
+    </form>
+    
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+    </div>
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="alert-error">
+        {{ errorMessage }}
+    </div>
+</div>

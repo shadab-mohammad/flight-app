@@ -1,0 +1,31 @@
+<h1>Manage Bookings</h1>
+<table>
+    <style>
+        table,th,td{
+            border: 1px solid black;
+        }
+    </style>
+    <thead>
+        <tr>
+            <th>Flight Number</th>
+            <th>User Name</th>
+            <th>User Email</th>
+            <th>Booking Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let booking of bookings">
+            <td>{{booking.flight.flightNumber | uppercase}}</td>
+            <td>{{booking.user.username}}</td>
+            <td>{{booking.user.email}}</td>
+            <td>{{booking.bookingDate | date}}</td>
+            <td>{{booking.status ? "Approved" : "Rejected" }}</td>
+            <td>
+                <button (click)="updateBookingStatus(booking.bookingId,true)">Approve</button>
+                <button (click)="updateBookingStatus(booking.bookingId,false)">Reject</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,45 @@
+<h1>Flight List:</h1>
+<label for="filter">Search :</label>
+<input type="text" name="source" placeholder="Enter Source " [(ngModel)]="source">
+<input type="text" name="destination"  [(ngModel)]="destination" placeholder="Enter Destination">
+<table>
+    <style>
+        table,th,td{
+            border: 1px solid black;
+        }
+    </style>
+    <thead>
+        <tr>
+            <th>Flight Number</th>
+            <th>Airline</th>
+            <th>Departure Location</th>
+            <th>Arrival Location</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let flight of flights | filter:source:destination ">
+            <td>{{flight.flightNumber | uppercase}}</td>
+            <td>{{flight.airline}}</td>
+            <td>{{flight.departureLocation}}</td>
+            <td>{{flight.arrivalLocation}}</td>
+            <td>{{flight.departureTime}}</td>
+            <td>{{flight.arrivalTime}}</td>
+            <td>{{flight.price | currency:'INR':'symbol'}}</td>
+            <div *ngIf="isAdmin">
+                <td>
+                    <button  (click)="updateFlight(flight.flightId)">Update</button>
+                    <button (click)="deleteFlight(flight.flightId)">Delete</button>
+                </td>
+            </div>
+            <div *ngIf="!isAdmin">
+                <td>
+                    <button (click)="navigateToBooking(flight.flightId)">Book</button>
+                </td>
+            </div>
+        </tr>
+    </tbody>
+</table>

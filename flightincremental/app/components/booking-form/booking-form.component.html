@@ -1,0 +1,33 @@
+<h2>Book Flight</h2>
+<form [formGroup]="bookingForm" (ngSubmit)="addNewBooking()">
+    <div>
+        <label for="flightNumber">Flight Number:</label>
+        <input type="text" id="flightNumber" class="flightNumber" readonly formControlName="flightNumber">
+    </div>
+
+    <div>
+        <label for="bookingDate">Booking Date:</label>
+        <input type="date" id="bookingDate" class="bookingDate" formControlName="bookingDate">
+        <div *ngIf="f.bookingDate.touched && f.bookingDate.invalid" class="error">
+            Booking date is required.
+        </div>
+    </div>
+
+    <div>
+        <label for="numberOfPassengers">Number of Passengers:</label>
+        <input type="number" id="numberOfPassengers" class="numberOfPassengers" (change)="calculateTotalPrice()" formControlName="numberOfPassengers">
+        <div *ngIf="f.numberOfPassengers.touched && f.numberOfPassengers.invalid" class="error">
+            Number of passengers must be at least 1.
+        </div>
+    </div>
+
+    <div>
+        <label for="totalPrice">Total Price:</label>
+        <input type="number" id="totalPrice" class="totalPrice" readonly [value]="totalCost">
+    </div>
+
+    <button type="submit" [disabled]="bookingForm.invalid">Book</button>
+</form>
+<div *ngIf="errorMessage">
+    {{errorMessage}}
+</div>
